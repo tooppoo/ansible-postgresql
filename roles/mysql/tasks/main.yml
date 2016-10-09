@@ -1,0 +1,56 @@
+- name: 古いmysqlリポジトリを削除
+  yum: name=mysql* state=removed
+
+- name: mysql用リポジトリを追加
+  yum: name=http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+
+- name: mysqlインストール
+  yum: name={{ item }} state=latest
+  with_items:
+    - mysql
+    - mysql-devel
+    - mysql-server
+    - mysql-utilities
+
+
+- name: Ansible用MySqlモジュール
+  yum: name=MySQL-python state=latest
+
+- name: .my.cnf配置
+  sudo: true
+  template:
+    src: my.cnf2
+    dest: /root/.my.cnf
+    mode: 0744
+
+- name: mysql起動
+  service:
+    name: mysqld
+    state: restarted
+    enabled: yes
+
+- name: rootユーザー設定
+  sudo: true
+  mysql_user:
+    user: root
+    host: localhost
+    password: "{{ root_path }}"
+
+- name: DB作成
+  mysql_db:
+    name: homepage
+    state: present
+
+- name: ログインユーザー設定
+  mysql_user:
+    user: dev
+    host: "{{ item }}"
+    password: "{{ user_path }}"
+    state: present
+    priv: "homepage.*:ALL"
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost.localdomain
+    - localhost
+    - "%"

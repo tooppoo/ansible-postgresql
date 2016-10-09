@@ -1,0 +1,20 @@
+- name: yumリポジトリ追加
+  yum:
+    name: epel-release
+    state: latest
+
+- name: 開発ツールインストール
+  yum: name={{item}} state=latest
+  with_items:
+    - git
+    - vim
+    - man
+
+- name: ポート解放
+  template:
+    src: iptables
+    dest: /etc/sysconfig/iptables
+    owner: root
+
+- name: ファイアウォール設定
+  service: name=iptables enabled=yes state=restarted
