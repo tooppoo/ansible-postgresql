@@ -12,7 +12,6 @@
     - mysql-server
     - mysql-utilities
 
-
 - name: Ansible用MySqlモジュール
   yum: name=MySQL-python state=latest
 
