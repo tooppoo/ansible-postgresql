@@ -2,3 +2,4 @@ database:
   user: dev
   pass: dev
   name: homepage
+  port: 5432
