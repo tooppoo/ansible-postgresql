@@ -28,13 +28,13 @@
   service: name=iptables enabled=yes state=restarted
 
 - name: DB初期化
-  shell: service postgresql-9.6 initdb
+  command: service postgresql-9.6 initdb
 
 - name: pg_hba.confバックアップ
-  shell: cp /var/lib/pgsql/9.6/data/pg_hba.conf /var/lib/pgsql/9.6/data/pg_hba.conf.default
+  command: cp /var/lib/pgsql/9.6/data/pg_hba.conf /var/lib/pgsql/9.6/data/pg_hba.conf.default
 
 - name: postgresql.confバックアップ
-  shell: cp /var/lib/pgsql/9.6/data/postgresql.conf /var/lib/pgsql/9.6/data/postgresql.conf.default
+  command: cp /var/lib/pgsql/9.6/data/postgresql.conf /var/lib/pgsql/9.6/data/postgresql.conf.default
 
 - name: pg_hba.confファイル更新
   template:
