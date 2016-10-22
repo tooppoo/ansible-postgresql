@@ -1,7 +1,9 @@
 - name: yumリポジトリ追加
   yum:
-    name: epel-release
+    name: {{ item }}
     state: latest
+  with_items:
+    - epel-release
 
 - name: 開発ツールインストール
   yum: name={{item}} state=latest
