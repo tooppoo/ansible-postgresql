@@ -51,16 +51,16 @@
 
 - name: DB作成
   postgresql_db:
-    name: homepage
+    name: "{{ database.name }}"
     login_user: postgres
     encoding: UTF-8
     state: present
 
 - name: ログインユーザー設定
   postgresql_user:
-    name: "{{ database.user }}" 
+    name: "{{ database.user }}"
     password: "{{ database.pass }}"
     state: present
     priv: ALL
-    db: homepage
+    db: "{{ database.name }}"
     login_user: postgres
