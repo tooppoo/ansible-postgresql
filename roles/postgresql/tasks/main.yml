@@ -46,7 +46,7 @@
   template:
     src: postgresql.conf
     dest: /var/lib/pgsql/9.6/data/postgresql.conf
-    
+
 - name: postgresql起動
   service: name=postgresql-9.6 state=restarted enabled=yes
 
@@ -59,8 +59,8 @@
 
 - name: ログインユーザー設定
   postgresql_user:
-    name: dev
-    password: "{{ user_path }}"
+    name: "{{ database.user }}" 
+    password: "{{ database.pass }}"
     state: present
     priv: ALL
     db: homepage
