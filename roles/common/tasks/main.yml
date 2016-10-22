@@ -12,3 +12,4 @@
     - vim
     - man
     - wget
+    - libselinux-python

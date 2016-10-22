@@ -14,7 +14,6 @@
     - postgresql96-devel
     - postgresql96-contrib
     - python-psycopg2
-    - libselinux-python
 
 - name: ポート解放
   lineinfile:
