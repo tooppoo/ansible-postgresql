@@ -13,3 +13,10 @@
     - man
     - wget
     - libselinux-python
+
+- name: ポート解放
+  lineinfile:
+    dest: /etc/sysconfig/iptables
+    state: present
+    insertafter: -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+    line:  -A INPUT -m state --state NEW -m tcp -p tcp --dport {{ database.port }} -j ACCEPT
