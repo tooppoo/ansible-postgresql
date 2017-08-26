@@ -4,3 +4,7 @@
   roles:
     - common
     - postgresql
+  vars_prompt:
+    - name: "db_name"
+      prompt: "Enter database name"
+      private: no

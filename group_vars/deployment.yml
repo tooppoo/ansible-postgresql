@@ -1,5 +1,5 @@
 database:
   user: dev
   pass: dev
-  name: homepage
+  name: "{{ db_name }}"
   port: 5432
